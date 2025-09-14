@@ -1,0 +1,22 @@
+{
+  "dependencies": {
+    "express": "^5.1.0",
+    "express-handlebars": "^8.0.1",
+    "node-sass": "^9.0.0"
+  },
+  "name": "blog",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "nodemon --inspect src/index.js",
+    "watch": "node-sass --watch src/resources/scss --output src/public/css",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "kietlc",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "morgan": "^1.10.1",
+    "nodemon": "^3.1.10"
+  }
+}
