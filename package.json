@@ -1,7 +1,4 @@
 {
-  "lint-staged": {
-    "\"src/**/*.{js, json, scss}\"": "--write --single-quote --trailing-comma all --tab-width 4"
-  },
   "dependencies": {
     "express": "^5.1.0",
     "express-handlebars": "^8.0.1",
@@ -15,6 +12,14 @@
     "start": "nodemon --inspect src/index.js",
     "watch": "node-sass --watch src/resources/scss --output src/public/css",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "lint-staged": {
+    "src/**/*.{js, json, scss}": ["prettier --write --single-quote --trailing-comma all --tab-width 4"]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "author": "kietlc",
   "license": "ISC",
