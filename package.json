@@ -8,7 +8,7 @@
   "version": "1.0.0",
   "main": "src/index.js",
   "scripts": {
-    "prepare": "husky install",
+    "prepare": "husky",
     "beautiful": "lint-staged",
     "start": "nodemon --inspect src/index.js",
     "watch": "node-sass --watch src/resources/scss --output src/public/css",
