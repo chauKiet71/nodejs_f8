@@ -3,13 +3,17 @@ const express = require('express');
 const morgan = require('morgan');
 const { engine } = require('express-handlebars');
 const route = require('./routes');
+const db = require('./config/db');
+
+//connect to DB
+// db.connect();
 
 const app = express();
 const port = 3000;
 
 app.use(express.static(path.join(__dirname, 'public'))); //public file image in file public
 //HTTP logger
-app.use(morgan('combined'));
+// app.use(morgan('combined'));
 
 //Template engine
 app.engine(
@@ -20,6 +24,8 @@ app.engine(
 );
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'resources/views'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 route(app);
 

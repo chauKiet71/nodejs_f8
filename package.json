@@ -1,8 +1,11 @@
 {
   "dependencies": {
+    "body-parser": "^2.2.0",
     "express": "^5.1.0",
     "express-handlebars": "^8.0.1",
-    "node-sass": "^9.0.0"
+    "mongoose": "^8.18.1",
+    "node-sass": "^9.0.0",
+    "puppeteer": "^24.21.0"
   },
   "name": "blog",
   "version": "1.0.0",
@@ -10,7 +13,7 @@
   "scripts": {
     "prepare": "husky",
     "beautiful": "lint-staged",
-    "start": "nodemon --inspect src/index.js",
+    "start": "nodemon src/index.js",
     "watch": "node-sass --watch src/resources/scss --output src/public/css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

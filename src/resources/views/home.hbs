@@ -1,1 +1,62 @@
-<h1>homepage</h1>
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tải ảnh Facebook</title>
+</head>
+
+<body>
+    <h2>Tải ảnh từ Facebook</h2>
+    <textarea id="fbLink" placeholder="Mỗi dòng nhập 1 link ảnh Facebook" rows="6" cols="60"></textarea>
+    <br>
+    <button onclick="downloadImage()">Tải xuống</button>
+
+    <p id="status"></p>
+    <div id="results"></div>
+
+    <script>
+        async function downloadImage() {
+            const rawText = document.getElementById("fbLink").value.trim();
+
+            // Tách thành mảng theo dòng, bỏ dòng trống
+            const links = rawText.split("\n").map(l => l.trim()).filter(l => l);
+
+            if (links.length === 0) {
+                document.getElementById("status").innerText = "Bạn chưa nhập link nào!";
+                return;
+            }
+
+            document.getElementById("status").innerText = "Đang xử lý...";
+            document.getElementById("results").innerHTML = "";
+
+            const requestOption = {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ links }) // gửi mảng link
+            };
+
+            try {
+                const res = await fetch("/download", requestOption);
+                const data = await res.json();
+
+                if (data.files && data.files.length > 0) {
+                    document.getElementById("status").innerText = "Tải thành công!";
+                    data.files.forEach(file => {
+                        const img = document.createElement("img");
+                        img.src = file;
+                        img.style.maxWidth = "400px";
+                        img.style.display = "block";
+                        document.getElementById("results").appendChild(img);
+                    });
+                } else {
+                    document.getElementById("status").innerText = "Lỗi: " + data.error;
+                }
+            } catch (err) {
+                document.getElementById("status").innerText = "Lỗi khi gọi API: " + err.message;
+            }
+        }
+    </script>
+</body>
+
+</html>
